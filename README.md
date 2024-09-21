@@ -19,24 +19,24 @@
 
    ### Установите репозиторий Zabbix
 
-### wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-2+debian11_all.deb
-### dpkg -i zabbix-release_5.0-2+debian11_all.deb
-### apt update
+##### wget https://repo.zabbix.com/zabbix/5.0/debian/pool/main/z/zabbix-release/zabbix-release_5.0-2+debian11_all.deb
+##### dpkg -i zabbix-release_5.0-2+debian11_all.deb
+##### apt update
 
 ###  1. Установите Zabbix сервер, веб-интерфейс и агент
 
-### apt install zabbix-server-pgsql zabbix-frontend-php php7.4-pgsql zabbix-apache-conf zabbix-agent
+##### apt install zabbix-server-pgsql zabbix-frontend-php php7.4-pgsql zabbix-apache-conf zabbix-agent
 
 ### 2. Создайте базу данных
 
-### sudo -u postgres createuser --pwprompt zabbix
-### sudo -u postgres createdb -O zabbix zabbix
-### zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix
+##### sudo -u postgres createuser --pwprompt zabbix
+##### sudo -u postgres createdb -O zabbix zabbix
+##### zcat /usr/share/doc/zabbix-server-pgsql*/create.sql.gz | sudo -u zabbix psql zabbix
 
 ### 3. Запустите процессы Zabbix сервера и агента
 
-### systemctl restart zabbix-server zabbix-agent apache2
-### systemctl enable zabbix-server zabbix-agent apache2
+##### systemctl restart zabbix-server zabbix-agent apache2
+##### systemctl enable zabbix-server zabbix-agent apache2
 
 ---
 
@@ -54,11 +54,32 @@
 #### Требования к результаты 
 1. Приложите в файл README.md скриншот раздела Configuration > Hosts, где видно, что агенты подключены к серверу
 ![zabbix agent](img/scrin2.png)
-3. Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
+2. Приложите в файл README.md скриншот лога zabbix agent, где видно, что он работает с сервером
 ![zabbix agent log](img/scrin3.png)
-5. Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
+3. Приложите в файл README.md скриншот раздела Monitoring > Latest data для обоих хостов, где видны поступающие от агентов данные.
 ![zabbix latest data](img/scrin4.png)
-7. Приложите в файл README.md текст использованных команд в GitHub
+4. Приложите в файл README.md текст использованных команд в GitHub
+
+   ### 1. Установите репозиторий Zabbix
+   
+   ##### wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
+   ##### dpkg -i zabbix-release_7.0-2+ubuntu24.04_all.deb
+   ##### apt update
+
+   ### 2. Установите Zabbix агент
+
+   ##### apt install zabbix-agent
+
+   ### 3. Запустите процесс Zabbix агента
+
+   ##### systemctl restart zabbix-agent
+   ##### systemctl enable zabbix-agent
+
+   ### 4. Редактирование файла /etc/zabbix/с
+   ##### Добавление адреса Zabbix  сервера в директиву Server=192.168.*.*, файла /etc/zabbix/zabbix_agentd.conf Zabbix агента.
+
+   ### 5. Перезагрузка zabbix agent
+    ##### systemctl restart zabbix-agent
 
 ---
 ## Задание 3 со звёздочкой*
